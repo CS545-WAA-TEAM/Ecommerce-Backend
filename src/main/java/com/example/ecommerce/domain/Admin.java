@@ -1,6 +1,5 @@
-package domain;
+package com.example.ecommerce.domain;
 
-import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.util.List;
 
