@@ -1,12 +1,10 @@
 package edu.miu.ecommerce.domain;
 
-import edu.miu.ecommerce.utils.OrderStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 
 @Entity
 @Data

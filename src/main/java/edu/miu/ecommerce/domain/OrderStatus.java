@@ -1,4 +1,4 @@
-package edu.miu.ecommerce.utils;
+package edu.miu.ecommerce.domain;
 
 public enum OrderStatus {
 

@@ -1,7 +1,5 @@
 package edu.miu.ecommerce.domain;
 
-import edu.miu.ecommerce.utils.AddressType;
-
 import javax.persistence.*;
 
 @Entity
