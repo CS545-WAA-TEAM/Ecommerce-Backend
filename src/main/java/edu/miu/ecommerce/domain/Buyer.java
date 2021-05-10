@@ -15,6 +15,7 @@ import java.util.Set;
 public class Buyer extends User{
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     long Id;
 
     @Column(name = "balance")
