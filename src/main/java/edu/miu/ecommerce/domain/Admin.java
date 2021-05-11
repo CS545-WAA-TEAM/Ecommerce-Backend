@@ -14,6 +14,4 @@ import java.util.List;
 @AllArgsConstructor
 public class Admin extends User{
 
-
-
 }
