@@ -17,6 +17,9 @@ public class Review extends Audit{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long Id;
 
+    @Column
+    private boolean isApproved;
+
     @ManyToOne
     private Buyer buyer;
 
