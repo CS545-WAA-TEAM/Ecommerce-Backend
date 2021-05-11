@@ -3,10 +3,9 @@ package edu.miu.ecommerce.domain;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -32,9 +31,9 @@ public class Product extends Audit {
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinTable
-    private List<Order> orders;
+    private Set<Order> orders;
 
     @OneToMany
-    private List<Review> reviews;
+    private Set<Review> reviews;
 
 }

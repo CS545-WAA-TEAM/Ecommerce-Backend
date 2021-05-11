@@ -3,10 +3,8 @@ package edu.miu.ecommerce.domain;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -30,11 +28,11 @@ public class Buyer extends User{
     private Set<Seller> following;
 
     @OneToMany(mappedBy= "buyer")
-    private List<Order> orders;
+    private Set<Order> orders;
 
     @OneToMany(cascade = CascadeType.ALL)
-    private List<Address> addresses;
+    private Set<Address> addresses;
 
     @OneToMany(cascade = CascadeType.ALL)
-    private List<Review> reviews;
+    private Set<Review> reviews;
 }

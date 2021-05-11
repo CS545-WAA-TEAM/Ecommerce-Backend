@@ -1,7 +1,5 @@
 package edu.miu.ecommerce.domain;
 
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
 import javax.persistence.*;
 
 @Entity

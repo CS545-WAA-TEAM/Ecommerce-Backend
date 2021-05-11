@@ -3,10 +3,9 @@ package edu.miu.ecommerce.domain;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -20,11 +19,11 @@ public class Seller extends User {
     @Column
     private boolean isApproved;
 
-    @OneToMany(mappedBy = "seller")
-    private List<Order> orders;
+    @OneToMany(mappedBy = "seller", fetch = FetchType.EAGER)
+    private Set<Order> orders;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable
-    private List<Product> products;
+    private Set<Product> products;
 
 }
