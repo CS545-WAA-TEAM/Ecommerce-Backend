@@ -1,8 +1,10 @@
 package edu.miu.ecommerce.domain;
 
 import javax.persistence.AttributeConverter;
+import javax.persistence.Converter;
 import java.util.stream.Stream;
 
+@Converter(autoApply = true)
 public class OrderStatusConverter implements AttributeConverter<OrderStatus,String> {
     @Override
     public String convertToDatabaseColumn(OrderStatus orderStatus) {
