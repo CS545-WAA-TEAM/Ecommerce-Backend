@@ -1,9 +1,12 @@
 package edu.miu.ecommerce.domain;
 
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 import javax.persistence.*;
 
 @Entity
-public class Address {
+@EntityListeners(AuditingEntityListener.class)
+public class Address extends Audit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
