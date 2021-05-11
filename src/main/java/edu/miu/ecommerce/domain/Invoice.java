@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -18,5 +18,5 @@ public class Invoice extends Audit{
     private long id;
 
     @OneToMany
-    List<Order> orders;
+    Set<Order> orders;
 }
