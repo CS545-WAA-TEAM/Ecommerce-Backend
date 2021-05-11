@@ -4,7 +4,6 @@ import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 import java.util.stream.Stream;
 
-
 @Converter(autoApply = true)
 public class AddressTypeConverter implements AttributeConverter<AddressType,String> {
     @Override
