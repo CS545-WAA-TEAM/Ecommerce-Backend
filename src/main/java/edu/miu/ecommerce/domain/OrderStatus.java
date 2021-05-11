@@ -2,7 +2,7 @@ package edu.miu.ecommerce.domain;
 
 public enum OrderStatus {
 
-    SHIPPED("Shipped"), CANCELLED("Cancelled"), DELIVERED("Delivered");
+    ORDERED("Ordered"), SHIPPED("Shipped"), CANCELLED("Cancelled"), DELIVERED("Delivered");
 
     private String status;
 
