@@ -16,10 +16,6 @@ import java.util.Set;
 @EntityListeners(AuditingEntityListener.class)
 public class Buyer extends User{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    long Id;
-
     @Column(name = "balance")
     private float balance;
 
@@ -34,7 +30,7 @@ public class Buyer extends User{
     private List<Order> orders;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinTable
+    @JoinColumn(name = "buyer_cart", nullable = false)
     private ShoppingCart shoppingCart;
 
     @OneToMany(cascade = CascadeType.ALL)

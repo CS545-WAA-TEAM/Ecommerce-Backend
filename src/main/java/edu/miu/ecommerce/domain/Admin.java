@@ -11,12 +11,9 @@ import java.util.List;
 @Entity
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
 public class Admin extends User{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    long id;
+
 
 }

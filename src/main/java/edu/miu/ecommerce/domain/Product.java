@@ -29,11 +29,11 @@ public class Product extends Audit {
     private float price;
 
     @ManyToOne
-    @JoinColumn(name="seller_id")
     private Seller seller;
 
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinTable
     private List<Order> orders;
 
     @OneToMany

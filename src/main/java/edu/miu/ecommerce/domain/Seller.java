@@ -5,10 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
@@ -18,14 +15,13 @@ import java.util.List;
 @EntityListeners(AuditingEntityListener.class)
 public class Seller extends User {
 
-    @Id
-    long Id;
-
     @OneToMany(mappedBy = "seller")
     private List<Order> orders;
 
-    @OneToMany(mappedBy = "product")
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinTable
     private List<Product> products;
 
+    @Column(name = "fullName")
     private String fullName;
 }

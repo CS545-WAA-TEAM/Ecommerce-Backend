@@ -12,6 +12,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
+@Table(name="Orders")
 public class Order extends Audit{
 
     @Id
@@ -28,6 +29,9 @@ public class Order extends Audit{
     @ManyToOne
     @JoinColumn(name="seller_id")
     private Seller seller;
+
+    @ManyToOne
+    private Product product;
 
     @OneToOne
     private Address shippingAddress;
