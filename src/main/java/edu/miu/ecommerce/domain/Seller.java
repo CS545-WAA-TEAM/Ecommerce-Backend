@@ -10,10 +10,15 @@ import java.util.List;
 
 @Entity
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-@EntityListeners(AuditingEntityListener.class)
+@AllArgsConstructor
 public class Seller extends User {
+
+    @Column(name = "fullName")
+    private String fullName;
+
+    @Column
+    private boolean isApproved;
 
     @OneToMany(mappedBy = "seller")
     private List<Order> orders;
@@ -22,6 +27,4 @@ public class Seller extends User {
     @JoinTable
     private List<Product> products;
 
-    @Column(name = "fullName")
-    private String fullName;
 }

@@ -5,20 +5,20 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @Entity
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-@EntityListeners(AuditingEntityListener.class)
+@AllArgsConstructor
 public class Review extends Audit{
 
     @Id
-    long Id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long Id;
+
+    @Column
+    private boolean isApproved;
 
     @ManyToOne
     private Buyer buyer;

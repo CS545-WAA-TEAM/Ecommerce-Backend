@@ -5,12 +5,11 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.*;
 
 @Entity
-@EntityListeners(AuditingEntityListener.class)
 public class Address extends Audit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    long id;
+    private long id;
 
     @Column(name = "state")
     private String state;

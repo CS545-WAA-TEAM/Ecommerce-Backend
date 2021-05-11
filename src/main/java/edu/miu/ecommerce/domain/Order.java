@@ -9,16 +9,14 @@ import javax.persistence.*;
 
 @Entity
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-@EntityListeners(AuditingEntityListener.class)
+@AllArgsConstructor
 @Table(name="Orders")
 public class Order extends Audit{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    Long id;
-
+    private long id;
 
     private OrderStatus status;
 
@@ -38,6 +36,5 @@ public class Order extends Audit{
 
     @OneToOne
     private Address billingAddress;
-
-
+    
 }

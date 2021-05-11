@@ -8,16 +8,15 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.*;
 import java.util.List;
 
-
 @Entity
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-@EntityListeners(AuditingEntityListener.class)
+@AllArgsConstructor
 public class Product extends Audit {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    Long id;
+    private long id;
 
     @Column(name = "product_name")
     private String name;
@@ -31,7 +30,6 @@ public class Product extends Audit {
     @ManyToOne
     private Seller seller;
 
-
     @OneToMany(cascade = CascadeType.ALL)
     @JoinTable
     private List<Order> orders;
@@ -39,5 +37,4 @@ public class Product extends Audit {
     @OneToMany
     private List<Review> reviews;
 
-//    isPurchased
 }

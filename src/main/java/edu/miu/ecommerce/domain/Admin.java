@@ -11,9 +11,6 @@ import java.util.List;
 @Entity
 @Data
 @AllArgsConstructor
-@EntityListeners(AuditingEntityListener.class)
 public class Admin extends User{
-
-
 
 }

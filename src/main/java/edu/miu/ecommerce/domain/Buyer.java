@@ -11,9 +11,8 @@ import java.util.Set;
 
 @Entity
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-@EntityListeners(AuditingEntityListener.class)
+@AllArgsConstructor
 public class Buyer extends User{
 
     @Column(name = "balance")
@@ -22,16 +21,16 @@ public class Buyer extends User{
     @Column(name = "fullName")
     private String fullName;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "buyer_cart")
+    private ShoppingCart shoppingCart;
+
     @OneToMany
     @JoinTable
     private Set<Seller> following;
 
     @OneToMany(mappedBy= "buyer")
     private List<Order> orders;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "buyer_cart", nullable = false)
-    private ShoppingCart shoppingCart;
 
     @OneToMany(cascade = CascadeType.ALL)
     private List<Address> addresses;
