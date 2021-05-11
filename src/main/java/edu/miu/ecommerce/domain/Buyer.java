@@ -3,6 +3,7 @@ package edu.miu.ecommerce.domain;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.util.List;
@@ -13,10 +14,6 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Buyer extends User{
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    long Id;
 
     @Column(name = "balance")
     private float balance;

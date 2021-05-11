@@ -1,15 +1,11 @@
 package edu.miu.ecommerce.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 
 @Entity
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+@EntityListeners(AuditingEntityListener.class)
 public class Address extends Audit {
 
     @Id
