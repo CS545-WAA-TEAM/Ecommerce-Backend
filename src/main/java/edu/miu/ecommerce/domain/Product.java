@@ -7,15 +7,15 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.List;
 
-
 @Entity
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class Product {
+@AllArgsConstructor
+public class Product extends Audit {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    Long id;
+    private long id;
 
     @Column(name = "product_name")
     private String name;

@@ -8,14 +8,14 @@ import javax.persistence.*;
 
 @Entity
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class Order {
+@AllArgsConstructor
+@Table(name="Orders")
+public class Order extends Audit{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    Long id;
-
+    private long id;
 
     private OrderStatus status;
 
@@ -32,6 +32,5 @@ public class Order {
 
     @OneToOne
     private Address billingAddress;
-
-
+    
 }

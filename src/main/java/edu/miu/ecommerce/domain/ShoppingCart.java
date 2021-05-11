@@ -9,12 +9,13 @@ import java.util.List;
 
 @Entity
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class ShoppingCart {
+@AllArgsConstructor
+public class ShoppingCart extends Audit{
 
     @Id
-    long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
 
     @OneToOne(mappedBy = "buyer_cart")
     private Buyer buyer;

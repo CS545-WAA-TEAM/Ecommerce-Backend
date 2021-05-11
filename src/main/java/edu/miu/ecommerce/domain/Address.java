@@ -1,13 +1,20 @@
 package edu.miu.ecommerce.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
 @Entity
-public class Address {
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class Address extends Audit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    long id;
+    private long id;
 
     @Column(name = "state")
     private String state;

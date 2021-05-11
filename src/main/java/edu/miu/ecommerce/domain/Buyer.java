@@ -10,8 +10,8 @@ import java.util.Set;
 
 @Entity
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class Buyer extends User{
 
     @Id
@@ -24,16 +24,16 @@ public class Buyer extends User{
     @Column(name = "fullName")
     private String fullName;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "buyer_cart")
+    private ShoppingCart shoppingCart;
+
     @OneToMany
     @JoinTable
     private Set<Seller> following;
 
     @OneToMany(mappedBy= "buyer")
     private List<Order> orders;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinTable
-    private ShoppingCart shoppingCart;
 
     @OneToMany(cascade = CascadeType.ALL)
     private List<Address> addresses;
