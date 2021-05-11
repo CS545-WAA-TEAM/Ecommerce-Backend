@@ -30,7 +30,6 @@ public class Product extends Audit {
     @ManyToOne
     private Seller seller;
 
-
     @OneToMany(cascade = CascadeType.ALL)
     @JoinTable
     private List<Order> orders;
@@ -38,5 +37,4 @@ public class Product extends Audit {
     @OneToMany
     private List<Review> reviews;
 
-//    isPurchased
 }
