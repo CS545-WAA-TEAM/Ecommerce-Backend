@@ -3,6 +3,7 @@ package edu.miu.ecommerce.domain;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.util.List;
@@ -12,7 +13,8 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Product {
+@EntityListeners(AuditingEntityListener.class)
+public class Product extends Audit {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;

@@ -11,7 +11,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ShoppingCart {
+public class ShoppingCart extends Audit{
 
     @Id
     long id;
