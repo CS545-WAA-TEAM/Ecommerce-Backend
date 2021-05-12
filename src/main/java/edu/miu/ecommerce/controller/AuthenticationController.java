@@ -97,7 +97,6 @@ public class AuthenticationController {
             Set<Role> roles = new HashSet<>();
             roles.add(roleService.getRoleByName("ROLE_SELLER"));
             seller.setRoles(roles);
-            seller.setOrders(orders);
             seller.setProducts(products);
             seller.setApproved(false);
             sellerService.addSeller(seller);
