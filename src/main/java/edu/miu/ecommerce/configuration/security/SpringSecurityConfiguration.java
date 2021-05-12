@@ -1,11 +1,14 @@
 package edu.miu.ecommerce.configuration.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.boot.web.servlet.RegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -21,10 +24,19 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
     CustomUserDetailsService customUserDetailsService;
 
     @Autowired
-    private CustomJwtAuthenticationFilter customJwtAuthenticationFilter;
-
-    @Autowired
     private JwtAuthenticationEntryPoint unauthorizedHandler;
+
+    @Bean
+    public CustomJwtAuthenticationFilter authenticationTokenFilterBean() throws Exception {
+        return new CustomJwtAuthenticationFilter();
+    }
+
+    @Bean
+    public RegistrationBean jwtAuthFilterRegister(CustomJwtAuthenticationFilter filter) {
+        FilterRegistrationBean registrationBean = new FilterRegistrationBean(filter);
+        registrationBean.setEnabled(false);
+        return registrationBean;
+    }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -32,17 +44,27 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
     @Override
+    public void configure(WebSecurity web) throws Exception {
+        web
+                .ignoring()
+                .antMatchers("/register");
+    }
+    @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().authorizeRequests()
 //                .authorizeRequests().antMatchers("/**").hasAnyAuthority("ADMIN")
+//                TODO REMOVE AFTER AUTH ON REACT
+                .antMatchers("/**").permitAll()
                 .antMatchers("/authenticate").permitAll()
+                .antMatchers("/register").permitAll().anyRequest().authenticated()
                 .and().exceptionHandling()
                 .authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-        http.addFilterBefore(customJwtAuthenticationFilter,
-                UsernamePasswordAuthenticationFilter.class);
+//                http.addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);
     }
+
+
 
     @Bean
     public AuthenticationManager authenticationManagerBean() throws Exception {

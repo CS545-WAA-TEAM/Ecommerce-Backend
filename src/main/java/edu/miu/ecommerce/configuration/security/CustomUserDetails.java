@@ -14,7 +14,6 @@ public class CustomUserDetails implements UserDetails {
 
     private String username;
     private String password;
-    private boolean isActive;
     private Set<Role> roles;
 
     public CustomUserDetails(User user) {
