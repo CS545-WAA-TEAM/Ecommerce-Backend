@@ -29,11 +29,11 @@ public class Product extends Audit {
     @ManyToOne
     private Seller seller;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable
     private Set<Order> orders;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Review> reviews;
 
-}
+   }

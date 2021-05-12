@@ -1,7 +1,6 @@
 package edu.miu.ecommerce.util;
 
-import edu.miu.ecommerce.domain.Role;
-import edu.miu.ecommerce.domain.Seller;
+import edu.miu.ecommerce.domain.*;
 import edu.miu.ecommerce.repository.BuyerDAO;
 import edu.miu.ecommerce.repository.ProductDAO;
 import edu.miu.ecommerce.repository.RoleDAO;
@@ -13,7 +12,10 @@ import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Component
 public class DataLoader implements CommandLineRunner {
@@ -42,11 +44,12 @@ public class DataLoader implements CommandLineRunner {
         Seller seller1 = new Seller("Bob Saget", true, null, null);
         Set<Role> roleSet = new HashSet<>();
         roleSet.add(roleDAO.findById(2L).get());
+        seller1.setId(1);
         seller1.setUsername("bob");
         seller1.setPassword(new BCryptPasswordEncoder().encode("saget"));
         seller1.setRoles(roleSet);
         sellerDAO.saveAll(Arrays.asList(seller1));
-        System.out.println(sellerDAO.findAll().toString());
+        System.out.println(StreamSupport.stream(sellerDAO.findAll().spliterator(),false).collect(Collectors.toList()).get(0).getId());
     }
 
     private void createRoles(){
@@ -69,6 +72,14 @@ public class DataLoader implements CommandLineRunner {
 
     private void createProducts(){
 //        TODO
+        Optional<Seller> seller = sellerDAO.findById(4L);
+        Set<Order> orders = new HashSet<>();
+        Set<Review> reviews = new HashSet<>();
+        Product product = new Product(1,"Hat","Just do it", 4, seller.get(), orders,reviews);
+        Product product1 = new Product(2,"Test","Test ", 4, seller.get(), orders,reviews);
+        productDAO.saveAll(Arrays.asList(product,product1));
+        System.out.println(productDAO.findAll().toString());
+
     }
 
     private void createOrders(){
