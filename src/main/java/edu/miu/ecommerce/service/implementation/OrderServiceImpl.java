@@ -3,7 +3,12 @@ package edu.miu.ecommerce.service.implementation;
 import edu.miu.ecommerce.domain.Order;
 import edu.miu.ecommerce.domain.Product;
 import edu.miu.ecommerce.service.OrderService;
+import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+
+@Service
+@Transactional
 public class OrderServiceImpl implements OrderService {
     @Override
     public Iterable<Order> getAllOrders() {
