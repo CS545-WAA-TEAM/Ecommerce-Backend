@@ -8,7 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Service
 @Transactional
@@ -18,8 +22,8 @@ public class SellerServiceImpl implements SellerService {
     SellerDAO sellerDAO;
 
     @Override
-    public Iterable<Seller> getAllSellers() {
-        return sellerDAO.findAll();
+    public List<Seller> getAllSellers() {
+        return StreamSupport.stream(sellerDAO.findAll().spliterator(), false).collect(Collectors.toList());
     }
 
     @Override
@@ -41,4 +45,15 @@ public class SellerServiceImpl implements SellerService {
     public List<Product> findProducts(long id) {
         return null;
     }
+
+    @Override
+    public Product addProduct(Product product, long id) {
+        Set<Product> products = new HashSet<>();
+        products.add(product);
+        Seller seller = getSellerById(id);
+        seller.setProducts(products);
+        sellerDAO.save(seller);
+        return product;
+    }
+
 }
