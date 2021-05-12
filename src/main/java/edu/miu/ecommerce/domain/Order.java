@@ -1,13 +1,12 @@
 package edu.miu.ecommerce.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name="Orders")
@@ -23,9 +22,9 @@ public class Order extends Audit{
     @JoinColumn(name="buyer_id")
     private Buyer buyer;
 
-    @ManyToOne
-    @JoinColumn(name="seller_id")
-    private Seller seller;
+//    @ManyToOne
+//    @JoinColumn(name="seller_id")
+//    private Seller seller;
 
     @ManyToOne
     private Product product;

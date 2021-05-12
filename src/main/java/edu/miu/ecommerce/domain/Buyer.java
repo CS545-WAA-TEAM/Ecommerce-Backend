@@ -23,16 +23,16 @@ public class Buyer extends User{
     @JoinColumn(name = "buyer_cart")
     private ShoppingCart shoppingCart;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinTable
     private Set<Seller> following;
 
-    @OneToMany(mappedBy= "buyer")
+    @OneToMany(mappedBy= "buyer",fetch = FetchType.EAGER)
     private Set<Order> orders;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private Set<Address> addresses;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Review> reviews;
 }

@@ -1,15 +1,17 @@
 package edu.miu.ecommerce.controller;
 
+import edu.miu.ecommerce.domain.Order;
 import edu.miu.ecommerce.domain.Product;
 import edu.miu.ecommerce.domain.Seller;
 import edu.miu.ecommerce.model.NewProductRequest;
+import edu.miu.ecommerce.model.OrderStatusRequest;
 import edu.miu.ecommerce.service.ProductService;
 import edu.miu.ecommerce.service.SellerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class SellerController {
@@ -34,14 +36,20 @@ public class SellerController {
     public void deleteSeller(@PathVariable long id) {
         sellerService.deleteSeller(id);
     }
+
     @PostMapping("/sellers/{id}/product")
-    public void addProduct(@PathVariable long id, @RequestBody NewProductRequest product){
+    public void addProduct(@PathVariable long id, @RequestBody NewProductRequest product) {
         Product newProduct = new Product();
         newProduct.setName(product.getName());
         newProduct.setDescription(product.getDescription());
         newProduct.setPrice(product.getPrice());
         newProduct.setOrders(null);
         newProduct.setReviews(null);
-        sellerService.addProduct(newProduct,id);
+        sellerService.addProduct(newProduct, id);
+    }
+    @PatchMapping("/sellers/{id}/product/{productId}/order/orderId")
+    public void updateOrderStatus(@PathVariable long id, @RequestBody OrderStatusRequest orderStatusRequest, @PathVariable long productId,@PathVariable long orderId){
+        sellerService.updateOrderStatus(id,orderStatusRequest.getStatus(),productId,orderId);
+
     }
 }

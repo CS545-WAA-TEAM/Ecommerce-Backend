@@ -1,5 +1,6 @@
 package edu.miu.ecommerce.service;
 
+import edu.miu.ecommerce.domain.OrderStatus;
 import edu.miu.ecommerce.domain.Product;
 import edu.miu.ecommerce.domain.Seller;
 
@@ -20,5 +21,5 @@ public interface SellerService {
 
     Product addProduct(Product product, long id);
 
-
+    void updateOrderStatus(long id, OrderStatus status, long orderId,long productId);
 }

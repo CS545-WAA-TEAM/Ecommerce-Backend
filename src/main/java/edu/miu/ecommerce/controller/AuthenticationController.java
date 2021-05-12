@@ -78,7 +78,7 @@ public class AuthenticationController {
             Set<Order> orders = new HashSet<>();
             Set<Product> products = new HashSet<>();
             seller.setUsername(userRegistrationRequest.getUsername());
-            seller.setOrders(orders);
+//            seller.setOrders(orders);
             seller.setProducts(products);
             seller.setApproved(false);
             sellerService.addSeller(seller);
