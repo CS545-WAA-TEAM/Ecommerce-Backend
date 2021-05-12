@@ -1,26 +1,40 @@
 package edu.miu.ecommerce.service.implementation;
 
 import edu.miu.ecommerce.domain.User;
+import edu.miu.ecommerce.model.UserAvailabilityRequest;
+import edu.miu.ecommerce.repository.UserDAO;
 import edu.miu.ecommerce.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class UserServiceImpl implements UserService {
+
+    @Autowired
+    UserDAO userDAO;
+
     @Override
     public Iterable<User> getAllUsers() {
-        return null;
+        return userDAO.findAll();
     }
 
     @Override
     public User getUserById(long id) {
-        return null;
+        return userDAO.findById(id).orElseThrow();
     }
 
     @Override
     public User addUser(User user) {
-        return null;
+        return userDAO.save(user);
     }
 
     @Override
     public void deleteUser(long id) {
+        userDAO.deleteById(id);
 
+    }
+
+    @Override
+    public User isUsernameAvailable(UserAvailabilityRequest userAvailabilityRequest) {
+        //TODO
+        return userDAO.getUserByUsername(userAvailabilityRequest.getUsername());
     }
 }
