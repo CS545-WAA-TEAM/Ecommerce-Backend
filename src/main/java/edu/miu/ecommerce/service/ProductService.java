@@ -2,14 +2,14 @@ package edu.miu.ecommerce.service;
 
 import edu.miu.ecommerce.domain.Product;
 
+import java.util.List;
+
 
 public interface ProductService {
 
-    Iterable<Product> getAllProducts();
+    List<Product> getAllProducts();
 
     Product getProductById(long id);
-
-    Product addProduct(Product product);
 
     void deleteProduct(long id);
 
