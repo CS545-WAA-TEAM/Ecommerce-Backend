@@ -40,6 +40,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public User isUsernameAvailable(UserAvailabilityRequest userAvailabilityRequest) {
         //TODO
-        return userDAO.getUserByUsername(userAvailabilityRequest.getUsername());
+        return userDAO.findByUsername(userAvailabilityRequest.getUsername()).get();
     }
 }
