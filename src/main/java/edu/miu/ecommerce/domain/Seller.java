@@ -19,7 +19,7 @@ public class Seller extends User {
     @Column
     private boolean isApproved;
 
-    @OneToMany(mappedBy = "seller", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "seller", fetch = FetchType.EAGER)
     private Set<Order> orders;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)

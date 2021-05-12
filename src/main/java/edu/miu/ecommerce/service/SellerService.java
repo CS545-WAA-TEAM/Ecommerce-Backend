@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface SellerService {
 
-    Iterable<Seller> getAllSellers();
+    List<Seller> getAllSellers();
 
     Seller getSellerById(long id);
 
@@ -17,6 +17,8 @@ public interface SellerService {
     void deleteSeller(long id);
 
     List<Product> findProducts(long id);
+
+    Product addProduct(Product product, long id);
 
 
 }
