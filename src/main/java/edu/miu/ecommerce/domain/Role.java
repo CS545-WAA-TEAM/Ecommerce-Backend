@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Data
@@ -18,4 +19,7 @@ public class Role extends Audit{
 
     @Column
     private String role;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Set<User> users;
 }

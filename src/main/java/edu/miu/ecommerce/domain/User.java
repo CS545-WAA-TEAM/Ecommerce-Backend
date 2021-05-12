@@ -23,8 +23,7 @@ public class User extends Audit {
     @Column(name = "password")
     private String password;
 
-    @OneToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
-    @JoinTable
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private Set<Role> roles;
 
 }
