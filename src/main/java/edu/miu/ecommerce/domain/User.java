@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Data
@@ -21,4 +22,9 @@ public class User extends Audit {
 
     @Column(name = "password")
     private String password;
+
+    @OneToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @JoinTable
+    private Set<Role> roles;
+
 }
