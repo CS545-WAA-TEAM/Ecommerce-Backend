@@ -18,7 +18,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@Component
 public class CustomJwtAuthenticationFilter extends OncePerRequestFilter {
 
     @Autowired
@@ -43,13 +42,26 @@ public class CustomJwtAuthenticationFilter extends OncePerRequestFilter {
             }
 
         } catch (ExpiredJwtException ex) {
-            request.setAttribute("exception", ex);
-            throw ex;
+            String isRefreshToken = request.getHeader("isRefreshToken");
+            String requestURL = request.getRequestURL().toString();
+            if (isRefreshToken != null && isRefreshToken.equals("true") && requestURL.contains("refreshtoken")) {
+                allowForRefreshToken(ex, request);
+            } else
+                request.setAttribute("exception", ex);
         } catch (BadCredentialsException ex) {
             request.setAttribute("exception", ex);
             throw ex;
         }
         chain.doFilter(request, response);
+    }
+
+    private void allowForRefreshToken(ExpiredJwtException ex, HttpServletRequest request) {
+
+        UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
+                null, null, null);
+        SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
+        request.setAttribute("claims", ex.getClaims());
+
     }
 
     private String extractJwtFromRequest(HttpServletRequest request) {

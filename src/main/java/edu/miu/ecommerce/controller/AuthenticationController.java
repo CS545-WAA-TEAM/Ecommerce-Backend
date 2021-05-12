@@ -8,6 +8,7 @@ import edu.miu.ecommerce.model.UserRegistrationRequest;
 import edu.miu.ecommerce.service.BuyerService;
 import edu.miu.ecommerce.service.SellerService;
 import edu.miu.ecommerce.util.JwtUtil;
+import io.jsonwebtoken.impl.DefaultClaims;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -15,11 +16,15 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 @RestController
@@ -85,6 +90,21 @@ public class AuthenticationController {
 
         }
 
+    @GetMapping(value = "/refreshtoken")
+    public ResponseEntity<?> refreshtoken(HttpServletRequest request) throws Exception {
 
+        DefaultClaims claims = (DefaultClaims) request.getAttribute("claims");
+
+        Map<String, Object> expectedMap = getMapFromIoJsonwebtokenClaims(claims);
+        String token = jwtTokenUtil.doGenerateRefreshToken(expectedMap, expectedMap.get("sub").toString());
+        return ResponseEntity.ok(new AuthenticationResponse(token));
+    }
+
+    public Map<String, Object> getMapFromIoJsonwebtokenClaims(DefaultClaims claims) {
+        Map<String, Object> expectedMap = new HashMap<String, Object>();
+        for (Map.Entry<String, Object> entry : claims.entrySet()) {
+            expectedMap.put(entry.getKey(), entry.getValue());
+        }
+        return expectedMap;
     }
 }
