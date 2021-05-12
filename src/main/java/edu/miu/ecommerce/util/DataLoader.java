@@ -50,9 +50,9 @@ public class DataLoader implements CommandLineRunner {
     }
 
     private void createRoles(){
-        Role roleAdmin = new Role(1,"ROLE_ADMIN");
-        Role roleSeller = new Role(2,"ROLE_SELLER");
-        Role roleBuyer = new Role(3,"ROLE_BUYER");
+        Role roleAdmin = new Role(1,"ROLE_ADMIN", null);
+        Role roleSeller = new Role(2,"ROLE_SELLER", null);
+        Role roleBuyer = new Role(3,"ROLE_BUYER", null);
 
         roleDAO.saveAll(Arrays.asList(roleAdmin, roleSeller, roleBuyer));
         System.out.println(roleDAO.findAll().toString());
