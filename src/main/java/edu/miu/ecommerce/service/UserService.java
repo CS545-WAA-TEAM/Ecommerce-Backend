@@ -1,9 +1,9 @@
 package edu.miu.ecommerce.service;
 
 import edu.miu.ecommerce.domain.User;
-import org.springframework.stereotype.Service;
+import edu.miu.ecommerce.model.UserAvailabilityRequest;
 
-@Service
+
 public interface UserService {
 
     Iterable<User> getAllUsers();
@@ -13,5 +13,7 @@ public interface UserService {
     User addUser(User user);
 
     void deleteUser(long id);
+
+    User isUsernameAvailable(UserAvailabilityRequest userAvailabilityRequest);
 
 }
