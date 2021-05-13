@@ -25,6 +25,7 @@ public class User extends Audit {
     @JsonIgnore
     private String password;
 
-    @ManyToMany
-    Set<Role> roles;
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    private Set<Role> roles;
+
 }

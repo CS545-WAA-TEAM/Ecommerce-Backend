@@ -25,7 +25,7 @@ public class Buyer extends User{
     @JsonIgnore
     private ShoppingCart shoppingCart;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinTable
     @JsonIgnore
     private Set<Seller> following;

@@ -30,7 +30,7 @@ public class Product extends Audit {
     @ManyToOne
     private Seller seller;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable
     @JsonIgnore
     private Set<Order> orders;
@@ -39,4 +39,4 @@ public class Product extends Audit {
     @JsonIgnore
     private Set<Review> reviews;
 
-}
+   }
