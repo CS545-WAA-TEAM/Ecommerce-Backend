@@ -5,6 +5,7 @@ import edu.miu.ecommerce.domain.Product;
 import edu.miu.ecommerce.domain.Seller;
 
 import java.util.List;
+import java.util.Set;
 
 
 public interface SellerService {
@@ -17,9 +18,10 @@ public interface SellerService {
 
     void deleteSeller(long id);
 
-    List<Product> findProducts(long id);
+    Set<Product> findProducts(long id);
 
     Product addProduct(Product product, long id);
 
-    void updateOrderStatus(long id, OrderStatus status, long orderId,long productId);
+
+    Seller approveSeller(long id);
 }

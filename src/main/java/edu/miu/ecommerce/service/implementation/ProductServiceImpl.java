@@ -1,7 +1,12 @@
 package edu.miu.ecommerce.service.implementation;
 
+import edu.miu.ecommerce.domain.Order;
 import edu.miu.ecommerce.domain.Product;
+import edu.miu.ecommerce.domain.Review;
+import edu.miu.ecommerce.model.ProductRequest;
+import edu.miu.ecommerce.repository.OrderDAO;
 import edu.miu.ecommerce.repository.ProductDAO;
+import edu.miu.ecommerce.repository.ReviewDAO;
 import edu.miu.ecommerce.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +23,12 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     ProductDAO productDAO;
 
+    @Autowired
+    OrderDAO orderDAO;
+
+    @Autowired
+    ReviewDAO reviewDAO;
+
     @Override
     public List<Product> getAllProducts() {
         return StreamSupport.stream(productDAO.findAll().spliterator(),false).collect(Collectors.toList());
@@ -29,11 +40,33 @@ public class ProductServiceImpl implements ProductService {
     }
     @Override
     public void deleteProduct(long id) {
-        productDAO.deleteById(id);
+        Product product = getProductById(id);
+        Order order = orderDAO.findFirstByProduct(product);
+//        TODO add check if product has reviews
+        if(order == null){
+            productDAO.deleteById(id);
+        }
     }
 
     @Override
-    public void updateProduct(Product product, long id) {
+    public Product updateProduct(ProductRequest productRequest, long id) {
+        Product product = getProductById(id);
+        product.setName(productRequest.getName());
+        product.setDescription(productRequest.getDescription());
+        product.setPrice(productRequest.getPrice());
 
+        return productDAO.save(product);
+    }
+
+    @Override
+    public List<Review> getReviewsOfProduct(long id) {
+        Product product = getProductById(id);
+        return reviewDAO.findAllByProduct(product);
+    }
+
+    @Override
+    public List<Order> getOrdersOfProduct(long id) {
+        Product product = getProductById(id);
+        return orderDAO.findAllByProduct(product);
     }
 }

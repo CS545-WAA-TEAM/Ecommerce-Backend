@@ -1,8 +1,7 @@
 package edu.miu.ecommerce.service;
 
-import edu.miu.ecommerce.domain.Buyer;
-import edu.miu.ecommerce.domain.Order;
-import edu.miu.ecommerce.domain.Review;
+import edu.miu.ecommerce.domain.*;
+import edu.miu.ecommerce.model.OrderAddressRequest;
 
 import java.util.List;
 
@@ -11,19 +10,23 @@ public interface BuyerService {
 
     Buyer findBuyerById(long id);
 
-    Iterable<Buyer> findAllBuyers();
-
     Buyer addBuyer(Buyer buyer);
-
-    void deleteBuyer(long id);
 
     List<Order> findBuyerOrdersById(long id);
 
-    Review addReviewByBuyerId(Review review, long id);
+    Review addReviewByBuyerId(Review review, long id, long productId);
 
-    Order placeOrderByBuyerId(Order order, long id);
+    List<Review> findReviewsByBuyerId(long id);
 
-    Order cancelOrderByBuyerId(Order order, long id);
+    Address addAddressToBuyer(Address address, long id);
 
+    List<Address> getAddressesOfBuyer(long id);
 
+    List<Product> findOrCreateShoppingCart(long id);
+
+    List<Product> addProductsToCart(List<Product> products, long id);
+
+    List<Product> clearShoppingCart(long id);
+
+    Invoice processShoppingCart(OrderAddressRequest orderAddresses, long id);
 }

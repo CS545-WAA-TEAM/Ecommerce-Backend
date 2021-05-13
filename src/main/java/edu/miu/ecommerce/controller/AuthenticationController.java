@@ -87,6 +87,7 @@ public class AuthenticationController {
             buyer.setReviews(reviews);
             buyerService.addBuyer(buyer);
             System.out.println("Buyer Created!");
+            return ResponseEntity.ok(buyer);
         }
         if (userRegistrationRequest.isSeller()) {
             Seller seller = new Seller();
@@ -101,6 +102,7 @@ public class AuthenticationController {
             seller.setApproved(false);
             sellerService.addSeller(seller);
             System.out.println("Seller Created!");
+            return ResponseEntity.ok(seller);
         }
         return ResponseEntity.ok("User Created");
     }

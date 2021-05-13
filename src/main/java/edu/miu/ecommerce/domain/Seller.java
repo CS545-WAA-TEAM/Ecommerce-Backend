@@ -1,5 +1,6 @@
 package edu.miu.ecommerce.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,11 +20,8 @@ public class Seller extends User {
     @Column
     private boolean isApproved;
 
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "seller", fetch = FetchType.EAGER)
-//    private Set<Order> orders;
-
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable
+    @JsonIgnore
     private Set<Product> products;
 
 }

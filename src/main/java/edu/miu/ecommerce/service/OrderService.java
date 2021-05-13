@@ -6,15 +6,11 @@ import edu.miu.ecommerce.domain.Product;
 
 public interface OrderService {
 
-    Iterable<Order> getAllOrders();
+    Order findOrderById(long id);
 
-    Order getOrderById(long id);
+    Order cancelOrder(long orderId);
 
-    Order addOrder(Order order);
+    Order shipOrder(long orderId);
 
-    void deleteOrder(long id);
-
-    Product findProductByOrderId();
-
-
+    Order deliverOrder(long orderId);
 }

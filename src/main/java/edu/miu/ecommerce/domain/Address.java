@@ -1,8 +1,15 @@
 package edu.miu.ecommerce.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Address extends Audit {
 
     @Id
@@ -22,5 +29,8 @@ public class Address extends Audit {
     private String country;
 
     private AddressType addressType;
+
+    @ManyToOne
+    private Buyer buyer;
 
 }

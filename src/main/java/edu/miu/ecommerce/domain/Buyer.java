@@ -1,5 +1,6 @@
 package edu.miu.ecommerce.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,25 +15,30 @@ import java.util.Set;
 public class Buyer extends User{
 
     @Column(name = "balance")
+    @JsonIgnore
     private float balance;
 
     @Column(name = "fullName")
     private String fullName;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "buyer_cart")
+    @JsonIgnore
     private ShoppingCart shoppingCart;
 
     @OneToMany(fetch = FetchType.EAGER)
     @JoinTable
+    @JsonIgnore
     private Set<Seller> following;
 
     @OneToMany(mappedBy= "buyer",fetch = FetchType.EAGER)
+    @JsonIgnore
     private Set<Order> orders;
 
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @JsonIgnore
     private Set<Address> addresses;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonIgnore
     private Set<Review> reviews;
 }

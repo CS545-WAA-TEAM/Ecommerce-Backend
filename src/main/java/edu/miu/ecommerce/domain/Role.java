@@ -1,5 +1,6 @@
 package edu.miu.ecommerce.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,5 +22,6 @@ public class Role extends Audit{
     private String role;
 
     @ManyToMany(fetch = FetchType.EAGER)
+    @JsonIgnore
     private Set<User> users;
 }

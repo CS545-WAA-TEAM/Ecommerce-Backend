@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @RestController
 public class SellerController {
@@ -27,6 +28,11 @@ public class SellerController {
         return sellerService.getAllSellers();
     }
 
+    @PatchMapping("/sellers/{id}/approve")
+    public Seller approve(@PathVariable long id){
+        return sellerService.approveSeller(id);
+    }
+
     @GetMapping("/sellers/{id}")
     public Seller getSellerById(@PathVariable long id) {
         return sellerService.getSellerById(id);
@@ -37,7 +43,7 @@ public class SellerController {
         sellerService.deleteSeller(id);
     }
 
-    @PostMapping("/sellers/{id}/product")
+    @PostMapping("/sellers/{id}/products")
     public void addProduct(@PathVariable long id, @RequestBody NewProductRequest product) {
         Product newProduct = new Product();
         newProduct.setName(product.getName());
@@ -47,9 +53,11 @@ public class SellerController {
         newProduct.setReviews(null);
         sellerService.addProduct(newProduct, id);
     }
-    @PatchMapping("/sellers/{id}/product/{productId}/order/orderId")
-    public void updateOrderStatus(@PathVariable long id, @RequestBody OrderStatusRequest orderStatusRequest, @PathVariable long productId,@PathVariable long orderId){
-        sellerService.updateOrderStatus(id,orderStatusRequest.getStatus(),productId,orderId);
 
+    @GetMapping("/sellers/{id}/products")
+    public Set<Product> getProducts(@PathVariable long id) {
+        return sellerService.findProducts(id);
     }
+
+//  @GetMapping("/sellers/{id}/followers") // get followers
 }

@@ -2,7 +2,7 @@ package edu.miu.ecommerce.domain;
 
 public enum AddressType {
 
-    BILLING("Billing"), SHIPPING("SHIPPING");
+    BILLING("BILLING"), SHIPPING("SHIPPING");
 
     private String type;
 

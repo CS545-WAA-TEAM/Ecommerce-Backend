@@ -44,6 +44,7 @@ public class SellerServiceImpl implements SellerService {
 
     @Override
     public Seller addSeller(Seller seller) {
+        seller.setApproved(false);
         return sellerDAO.save(seller);
     }
 
@@ -53,28 +54,22 @@ public class SellerServiceImpl implements SellerService {
     }
 
     @Override
-    public List<Product> findProducts(long id) {
-        return null;
+    public Set<Product> findProducts(long id) {
+        return productDAO.findAllBySeller(getSellerById(id));
     }
 
     @Override
     public Product addProduct(Product product, long id) {
-        Set<Product> products = new HashSet<>();
-        products.add(product);
         Seller seller = getSellerById(id);
-        seller.setProducts(products);
-        sellerDAO.save(seller);
-        return product;
+        product.setSeller(seller);
+        return productDAO.save(product);
     }
 
     @Override
-    public void updateOrderStatus(long id, OrderStatus status, long orderId,long productId) {
-        Optional<Product> product = productDAO.findById(productId);
-        Order order = product.get().getOrders().stream().filter(o -> o.getId() == orderId).findFirst().get();
-        order.setStatus(status);
-        orderDAO.save(order);
-
-
+    public Seller approveSeller(long id) {
+       Seller seller = getSellerById(id);
+       seller.setApproved(true);
+       return sellerDAO.save(seller);
     }
 
 }

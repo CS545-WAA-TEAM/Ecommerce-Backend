@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User isUsernameAvailable(UserAvailabilityRequest userAvailabilityRequest) {
-        //TODO
+        //TODO add api endpoint
         return userDAO.findByUsername(userAvailabilityRequest.getUsername()).get();
     }
 }
