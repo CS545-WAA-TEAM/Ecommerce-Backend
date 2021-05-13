@@ -15,7 +15,6 @@ import java.util.Set;
 public class Buyer extends User{
 
     @Column(name = "balance")
-    @JsonIgnore
     private float balance;
 
     @Column(name = "fullName")
