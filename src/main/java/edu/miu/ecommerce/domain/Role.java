@@ -12,16 +12,16 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Seller extends User {
+public class Role extends Audit{
 
-    @Column(name = "fullName")
-    private String fullName;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
 
     @Column
-    private boolean isApproved;
+    private String role;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JsonIgnore
-    private Set<Product> products;
-
+    private Set<User> users;
 }

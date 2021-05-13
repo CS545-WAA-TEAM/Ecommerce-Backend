@@ -24,16 +24,12 @@ public class Order extends Audit{
     private Buyer buyer;
 
     @ManyToOne
-    @JoinColumn(name="seller_id")
-    private Seller seller;
-
-    @ManyToOne
     private Product product;
 
-    @OneToOne
+    @ManyToOne
     private Address shippingAddress;
 
-    @OneToOne
+    @ManyToOne
     private Address billingAddress;
     
 }

@@ -17,9 +17,9 @@ public class ShoppingCart extends Audit{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @OneToOne(mappedBy = "shoppingCart",cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.MERGE)
     private Buyer buyer;
 
-    @OneToMany
+    @ManyToMany
     private List<Product> products;
 }

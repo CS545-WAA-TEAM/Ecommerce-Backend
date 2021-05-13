@@ -1,5 +1,6 @@
 package edu.miu.ecommerce.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -31,9 +32,11 @@ public class Product extends Audit {
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinTable
+    @JsonIgnore
     private Set<Order> orders;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonIgnore
     private Set<Review> reviews;
 
 }

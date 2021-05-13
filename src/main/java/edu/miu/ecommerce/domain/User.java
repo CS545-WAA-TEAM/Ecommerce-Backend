@@ -1,10 +1,12 @@
 package edu.miu.ecommerce.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Data
@@ -20,5 +22,9 @@ public class User extends Audit {
     private String username;
 
     @Column(name = "password")
+    @JsonIgnore
     private String password;
+
+    @ManyToMany
+    Set<Role> roles;
 }
