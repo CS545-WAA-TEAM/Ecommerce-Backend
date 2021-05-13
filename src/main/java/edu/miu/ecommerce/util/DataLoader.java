@@ -104,7 +104,7 @@ public class DataLoader implements CommandLineRunner {
         adminDAO.save(admin);
         StreamSupport.stream(adminDAO.findAll().spliterator(),false)
                 .forEach(admin1 -> System.out.println("Admin ID: " + admin1.getId() + " Admin Username: " + admin1.getUsername()));
-        System.out.println("Buyer Password: admin");
+        System.out.println("Admin Password: admin");
 
     }
 
