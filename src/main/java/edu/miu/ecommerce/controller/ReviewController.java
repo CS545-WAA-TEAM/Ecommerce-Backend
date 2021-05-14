@@ -4,13 +4,11 @@ import edu.miu.ecommerce.domain.Review;
 import edu.miu.ecommerce.repository.ReviewDAO;
 import edu.miu.ecommerce.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin("http://localhost:3000")
 @RestController
 public class ReviewController {
 
