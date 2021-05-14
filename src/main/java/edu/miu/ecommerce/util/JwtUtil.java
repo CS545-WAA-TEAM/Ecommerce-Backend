@@ -41,13 +41,13 @@ public class JwtUtil {
         Map<String, Object> claims = new HashMap<>();
         Collection<? extends GrantedAuthority> roles = userDetails.getAuthorities();
         if(roles.contains(new SimpleGrantedAuthority("ROLE_ADMIN"))){
-            claims.put("isAdmin", true);
+            claims.put("role", "ROLE_ADMIN");
         }
         if(roles.contains(new SimpleGrantedAuthority("ROLE_SELLER"))){
-            claims.put("isSeller", true);
+            claims.put("role", "ROLE_SELLER");
         }
         if(roles.contains(new SimpleGrantedAuthority("ROLE_BUYER"))){
-            claims.put("isBuyer", true);
+            claims.put("role", "ROLE_BUYER");
         }
         claims.put("userId",userService.getUserByUsername(userDetails.getUsername()).getId());
         return doGenerateToken(claims, userDetails.getUsername());
