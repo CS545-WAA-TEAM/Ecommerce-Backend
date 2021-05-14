@@ -85,9 +85,9 @@ public class AuthenticationController {
             buyer.setOrders(orders);
             buyer.setAddresses(addresses);
             buyer.setReviews(reviews);
-            buyerService.addBuyer(buyer);
+            Buyer savedBuyer = buyerService.addBuyer(buyer);
             System.out.println("Buyer Created!");
-            return ResponseEntity.ok(buyer);
+            return ResponseEntity.ok(savedBuyer);
         }
         if (userRegistrationRequest.isSeller()) {
             Seller seller = new Seller();
@@ -100,9 +100,9 @@ public class AuthenticationController {
             seller.setRoles(roles);
             seller.setProducts(products);
             seller.setApproved(false);
-            sellerService.addSeller(seller);
+            Seller savedSeller = sellerService.addSeller(seller);
             System.out.println("Seller Created!");
-            return ResponseEntity.ok(seller);
+            return ResponseEntity.ok(savedSeller);
         }
         return ResponseEntity.ok("User Created");
     }
