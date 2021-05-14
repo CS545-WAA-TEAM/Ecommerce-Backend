@@ -2,6 +2,8 @@ package edu.miu.ecommerce.util;
 
 import edu.miu.ecommerce.domain.*;
 import edu.miu.ecommerce.repository.*;
+import edu.miu.ecommerce.service.BuyerService;
+import edu.miu.ecommerce.service.ReviewService;
 import edu.miu.ecommerce.service.SellerService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +46,12 @@ public class DataLoader implements CommandLineRunner {
     @Autowired
     SellerService sellerService;
 
+    @Autowired
+    BuyerService buyerService;
+
+    @Autowired
+    ReviewService reviewService;
+
     @Override
     public void run(String... args) throws Exception {
         createRoles();
@@ -53,6 +61,7 @@ public class DataLoader implements CommandLineRunner {
         createProducts();
         createOrders();
         createReviews();
+        createAddress();
     }
 
     private void createRoles(){
@@ -134,6 +143,26 @@ public class DataLoader implements CommandLineRunner {
 
     private void createReviews(){
 //        TODO
+
+        Review review = new Review();
+        review.setContent("I am not happy about this product");
+
+        buyerService.addReviewByBuyerId(review,6, 8);
+
+
+    }
+
+    private void createAddress(){
+        Address address = new Address();
+        address.setAddressType(AddressType.BILLING);
+        address.setCountry("USA");
+        address.setCity("Fairfield");
+        address.setState("Iowa");
+        address.setZipCode(52557);
+
+        buyerService.addAddressToBuyer(address,6);
+
+
     }
 
 }
