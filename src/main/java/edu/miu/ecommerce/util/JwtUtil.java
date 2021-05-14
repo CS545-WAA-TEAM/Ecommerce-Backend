@@ -1,6 +1,8 @@
 package edu.miu.ecommerce.util;
 
+import edu.miu.ecommerce.service.UserService;
 import io.jsonwebtoken.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.GrantedAuthority;
@@ -12,6 +14,9 @@ import java.util.*;
 
 @Service
 public class JwtUtil {
+
+    @Autowired
+    UserService userService;
 
     private String secret;
     private int jwtExpirationInMs;
@@ -44,6 +49,7 @@ public class JwtUtil {
         if(roles.contains(new SimpleGrantedAuthority("ROLE_BUYER"))){
             claims.put("isBuyer", true);
         }
+        claims.put("userId",userService.getUserByUsername(userDetails.getUsername()).getId());
         return doGenerateToken(claims, userDetails.getUsername());
     }
 

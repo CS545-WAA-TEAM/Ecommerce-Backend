@@ -6,6 +6,8 @@ import edu.miu.ecommerce.model.UserAvailabilityRequest;
 
 public interface UserService {
 
+    User getUserByUsername(String username);
+
     Iterable<User> getAllUsers();
 
     User getUserById(long id);
