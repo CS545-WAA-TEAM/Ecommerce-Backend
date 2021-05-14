@@ -132,6 +132,7 @@ public class BuyerServiceImpl implements BuyerService {
             buyerDAO.save(buyer);
             Invoice invoice = new Invoice();
             invoice.setOrders(savedOrders);
+            clearShoppingCart(id);
             return invoiceDAO.save(invoice);
         }
         return null;
